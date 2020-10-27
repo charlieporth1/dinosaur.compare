@@ -1,0 +1,19 @@
+#container-dino-info {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+#dino-info-title {
+    font-size: large;
+}
+
+#dino-info-fact{
+    font-size: small;
+}
+#dino-info-where {
+
+}
+#dino-info-when {
+    
+}

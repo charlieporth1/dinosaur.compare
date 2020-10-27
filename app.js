@@ -1,4 +1,15 @@
+import * as dinoData from "./dino.json"
+function getDino(dinoName) {
+    return dinoData.Dinos.filter((dinoData)=> dinoData.species === dinoName).shift();
+}
 
+function replaceDino(dinoName) {
+    const dinoData = getDino(dinoName);
+    window.document.getElementById("dino-info-title").innerHTML = dinoData.species;
+    window.document.getElementById("dino-info-img").src = `images/${dinoData.species}.png`;
+    window.document.getElementById("dino-info-fact").innerHTML = dinoData.fact;
+    window.document.getElementById("dino-info-fact").innerHTML = dinoData.fact;
+}
     // Create Dino Constructor
 
 
