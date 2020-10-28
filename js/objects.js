@@ -1,4 +1,3 @@
-
 // enum Diet = {
 //     herbavor = 'Herbavor',
 //     omnivor = 'Omnivor',
@@ -9,29 +8,32 @@ const HumanObject = {
     fact: "Is a Full Stack Developer",
     weight: 200,
     height: 200,
-    diet:'meat',
+    diet: 'meat',
 };
-const AnimalObject  = {
-    name : "Charlie Porth",
-    fact :"Is a software developer",
-    when: "2020",
-    diet: "meat",
-    where: "USA",
-    weight: 200,
-    height: 200,
-    imgUrl: function () {
-      return `../images/${encodeURI(this.name)}.png`;
-    },
-    populate: function(data) {
-        this.name = data.species;
-        this.fact = data.fact;
-        this.height = data.height;
-        this.weight = data.weight;
-        this.where = data.where;
-        this.when = data.when;
-        this.diet = data.diet;
+const AnimalObject = {
+        name: "Charlie Porth",
+        fact: "Is a software developer",
+        when: "2020",
+        diet: "meat",
+        where: "USA",
+        weight: 200,
+        height: 200,
+        imgUrl: function () {
+            return `../images/${encodeURI(this.name)}.png`;
+        },
+        populate: function (data) {
+            AnimalObject.name = data.species;
+            AnimalObject.fact = data.fact;
+            AnimalObject.height = data.height;
+            AnimalObject.weight = data.weight;
+            AnimalObject.where = data.where;
+            AnimalObject.when = data.when;
+            AnimalObject.diet = data.diet;
+            return AnimalObject;
+        }
     }
-};
+;
+
 function getJSON() {
     return (function () {
         let json = null;

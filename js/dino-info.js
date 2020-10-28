@@ -20,7 +20,7 @@ function replaceDino(divId, dinoName) {
              img.src = url;
              img.alt = `${animal.name} from ${animal.where}`
          } catch (e) {
-             console.error("Could not find img "+ JSON.stringify(e))
+             console.error("Could not find img "+ e.toString())
          }
      }, 1000)
 
