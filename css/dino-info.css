@@ -1,19 +1,41 @@
+
 #container-dino-info {
     display: flex;
     flex: 1;
     flex-direction: column;
+    padding: 25px;
+    margin: 25px;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
 }
 
-#dino-info-title {
+.dino-info-title {
     font-size: large;
 }
 
-#dino-info-fact{
+.dino-info-fact{
+    font-size: medium;
+}
+.dino-info-where {
     font-size: small;
 }
-#dino-info-where {
+.dino-info-when {
+    font-size: small;
+}
+.dino-info-diet {
+    font-size: small;
+}
+.dino-info-height {
+    font-size: small;
+}
+.dino-info-img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
 
 }
-#dino-info-when {
-    
+.dino-info-img-div{
+    width: 100px;
+    height: 100px;
 }
