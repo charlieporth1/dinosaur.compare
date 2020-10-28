@@ -1,11 +1,13 @@
 function onClick() {
-    $.getScript("/main.js").done(function (script) {
+    $.getScript("/main.js", function(script) {
         // alert("Script loaded but not necessarily executed.");
             createData();
     });
 
 }
-
+function removeFormFromDom() {
+    document.getElementById("dino-compare").hidden = true;
+}
 // Create Dino Constructor
 
 

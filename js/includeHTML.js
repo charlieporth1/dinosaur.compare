@@ -1,5 +1,4 @@
 function includeHTML() {
-    console.log("Running includeHTML");
     let z, i, elmnt, file, xhttp;
     /* Loop through a collection of all HTML elements: */
     z = document.getElementsByTagName("*");
@@ -22,7 +21,7 @@ function includeHTML() {
                     elmnt.removeAttribute("w3-include-html");
                     includeHTML();
                 }
-            }
+            };
             xhttp.open("GET", file, true);
             xhttp.send();
             /* Exit the function: */

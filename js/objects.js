@@ -1,38 +1,43 @@
-// enum Diet = {
-//     herbavor = 'Herbavor',
-//     omnivor = 'Omnivor',
-//     carnivor = 'Carnivor'
-// },
-const HumanObject = {
-    name: "Charlie Porth",
-    fact: "Is a Full Stack Developer",
-    weight: 200,
-    height: 200,
-    diet: 'meat',
-};
-const AnimalObject = {
-        name: "Charlie Porth",
-        fact: "Is a software developer",
-        when: "2020",
-        diet: "meat",
-        where: "USA",
-        weight: 200,
-        height: 200,
-        imgUrl: function () {
-            return `../images/${encodeURI(this.name)}.png`;
-        },
-        populate: function (data) {
-            AnimalObject.name = data.species;
-            AnimalObject.fact = data.fact;
-            AnimalObject.height = data.height;
-            AnimalObject.weight = data.weight;
-            AnimalObject.where = data.where;
-            AnimalObject.when = data.when;
-            AnimalObject.diet = data.diet;
-            return AnimalObject;
-        }
+function HumanObject() {
+    this.name = "Charlie Porth";
+    this.fact = "Is a Full Stack Developer";
+    this.weight = 200;
+    this.height = 200;
+    this.diet = 'meat';
+    this.imgUrl = function () {
+        return "../images/human.png";
+    };
+    this.populate = function (json) {
+        this.name = json.name;
+        this.weight = json.weight;
+        this.height = json.height;
+        this.diet = json.diet;
+        return this;
+    };
+}
+
+function AnimalObject() {
+    this.name = "Charlie Porth";
+    this.fact = "Is a software developer";
+    this.when = "2020";
+    this.diet = "meat";
+    this.where = "USA";
+    this.weight = 200;
+    this.height = 200;
+    this.imgUrl = function () {
+        return `../images/${encodeURI(this.name)}.png`;
+    };
+    this.populate = function (data) {
+        this.name = data.species;
+        this.fact = data.fact;
+        this.height = data.height;
+        this.weight = data.weight;
+        this.where = data.where;
+        this.when = data.when;
+        this.diet = data.diet;
+        return this;
     }
-;
+}
 
 function getJSON() {
     return (function () {
@@ -51,15 +56,19 @@ function getJSON() {
 }
 
 function getAnimal(animalName) { //Get JSON data
-    const data = Array.from(getData()).filter((animal) => animal.name === animalName).shift();
-    return data;
+    try {
+        const data = Array.from(getData()).filter((animal) => animal.name === animalName).shift();
+        return data;
+    } catch (e) {
+        return new HumanObject;
+    }
 }
 
 function getData() { //Array of JSON Data
     const animalsJSON = this.getJSON().Dinos;
     const animals = Array.from(animalsJSON).map((data) => {
-        const animal = new AnimalObject.populate(data);
-        return animal;
+        const animal = new AnimalObject;
+        return animal.populate(data);
     });
     return animals;
 }

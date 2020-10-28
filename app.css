@@ -50,12 +50,12 @@ p {
     position: relative;
     box-sizing: border-box;
     width: 100%;
+    background: #009687f5;
 }
 
 .grid-item:nth-child(1){
     background: #009687f5;
 }
-
 .grid-item:nth-child(2){
     background: #dc7657f5;
 }
@@ -89,7 +89,7 @@ p {
 }
 
 @media (min-width: 550px) {
-    #grid div {
+    #grid .grid-item {
         width: calc(100% / 3);
     }
 }
@@ -104,18 +104,18 @@ p {
     padding-bottom: 1em;
 }
 
-.grid-item p {
-    background: rgba(000,000,000, .3);
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    padding: 0.8em 0.8em 1.8em;
-    margin:0;
-    box-sizing: border-box;
-    font-size: 1.2em;
-    font-weight: 600;
-    color: #fff;
-}
+/*.grid-item p {*/
+/*    background: rgba(000,000,000, .3);*/
+/*    position: absolute;*/
+/*    bottom: 0;*/
+/*    width: 100%;*/
+/*    padding: 0.8em 0.8em 1.8em;*/
+/*    margin:0;*/
+/*    box-sizing: border-box;*/
+/*    font-size: 1.2em;*/
+/*    font-weight: 600;*/
+/*    color: #fff;*/
+/*}*/
 
 /* Form Styles */
 .form-container {

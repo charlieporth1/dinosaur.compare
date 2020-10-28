@@ -1,54 +1,54 @@
-($.getScript("/js/utils.js", function(script) {
+($.getScript("/js/utils.js", function (script) {
 })());
-($.getScript("/js/objects.js",function (script)  {
+($.getScript("/js/objects.js", function (script) {
 })());
 
 function createData() {
-    console.log("createData");
     const animalData = Array.from(this.getData());
-    console.log("createData: animalData", animalData);
+    console.log(animalData)
+    const pigeon = animalData.filter((data)=> data.name.toString().toLowerCase() === "pigeon").shift();
     const name = this.getInputValue("name");
-    const height = parseFloat(this.getInputValue("feet")) * 12 + parseFloat(this.getInputValue("inches"));
-    const weight = parseFloat(this.getInputValue("weight"));
+    const rootWeight = parseFloat(this.getInputValue("feet")) * 12 + parseFloat(this.getInputValue("inches"));
+    const rootHeight = parseFloat(this.getInputValue("weight"));
     const diet = this.getInputValue("diet");
 
     function generateMultiplier(min, max) {
-        return Math.floor((Math.random() * (max - min)) + min)
+        return Math.floor((Math.random() * (max - min)) + min) * 10;
     }
 
     function generateResults() {
-        // const multiplier = generateMultiplier();
-        const animalDataFilteredByDiet = animalData.filter((animal) => animal.diet = diet);
+        const animalDataFiltered = (diet.toLowerCase() !== "unselected" ? animalData.filter((animal) => animal.diet = diet) : animalData);
 
         function query(height, weight) {
-            const range = generateMultiplier(1, 100);
-            console.log(range);
-            // const heightFiltered = animalDataFilteredByDiet.filter((animal) => height * multiplier <= animal.height + range && height * multiplier >= animal.height - range);
-            // const weightFiltered = animalDataFilteredByDiet.filter((animal) => weight * multiplier <= animal.weight + range && height * multiplier >= animal.weight - range);
-            const heightFiltered = animalDataFilteredByDiet.filter((animal) => height <= animal.height + range && height >= animal.height - range);
-            const weightFiltered = animalDataFilteredByDiet.filter((animal) => weight <= animal.weight + range && height >= animal.weight - range);
+            const range = generateMultiplier(1, 48);
+            const weightMx = generateMultiplier(1, 300);
+            const heightFiltered = animalDataFiltered.filter((animal) => height <= animal.height + range * 2 && height >= animal.height - (range / 2) + 9);
+            const weightFiltered = animalDataFiltered.filter((animal) => weight * weightMx  <= animal.weight + range * (weightMx / 2) && height * weightMx >= animal.weight - (range / 2) + 1);
+           console.log("heightFiltered, weightFiltered", heightFiltered, weightFiltered)
             if (weightFiltered.length <= 0 && heightFiltered.length <= 0) {
                 (!!height && !!weight) && query(height, weight); //Rerun if not found without a infinite loop if  0
             }
-            return [...heightFiltered, ...weightFiltered]; //result
+            const human = new HumanObject;
+            const top = [heightFiltered.shift(), pigeon, weightFiltered.shift()];
+            const middle = [heightFiltered[2],human.populate(name, rootWeight, rootHeight, diet), weightFiltered[2]];
+            const bottom = animalData.map((data) => [...top, ...middle].filter((item) => item.name === data.name).length === 0 ? data : undefined).filter((data) => !!data);
+
+            const root = [...top, ...middle, ...bottom];
+            console.log(root);
+            return root; //result
         }
 
         function addToDom() {
-            const animalResults = query(height, weight);
-            console.log("addToDom: animalResults ", animalResults);
-            const mapNodes = Array.from(animalResults).map((data) => {
-                const html = `<div style="width: 100%">
-                                <div style="width: 100%" id="${data.name}" w3-include-html="view/dinoInfo.html">
-                             
-                            </div>
-                    </div>`;
-                const node = window.document.createTextNode(html);
+            const animalResults = query(rootHeight, rootWeight);
+            Array.from(animalResults).forEach((data) => {
+                const html = `<div class="grid-item"  id="${data.name}" w3-include-html="view/dinoInfo.html"></div>`;
                 window.document.getElementById("grid").innerHTML += html;
-                $('#grid').hide().show(0);
                 const userProg = document.createElement('script');
-                userProg.text = [`replaceDino("${data.name}", "${data.name}");`, "includeHTML();"].join('\n');
+                const isHuman = ((typeof data) === HumanObject);
+                console.log(isHuman);
+                const name = !!data.name ? data.name : "human";
+                userProg.text = [`replaceAnimal("${name}", "${name}");`, "includeHTML();"].join('\n');
                 document.head.appendChild(userProg);
-                return node;
             });
 
         }
@@ -56,7 +56,7 @@ function createData() {
         addToDom();
     }
 
-    if (!height && !weight) {
+    if (!rootHeight && !rootWeight) {
         alert("Height and Weight required");
     } else {
         generateResults();
