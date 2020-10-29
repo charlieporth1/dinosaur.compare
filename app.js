@@ -26,7 +26,6 @@ function onRetry() {
 
 function createData() {
     const animals = Array.from(this.getAnimalData());
-    console.log(animals)
     const pigeon = animals.filter((animal) => animal.name.toString().toLowerCase() === "pigeon").shift();
     const name = this.getInputValue("name");
     const rootHeight = parseFloat(this.getInputValue("feet")) * 12 + parseFloat(this.getInputValue("inches"));

@@ -39,7 +39,7 @@ function replaceAnimal(divId, dinoName) {
                 whereP.hidden = true;
                 factP.hidden = true;
                 dietP.innerHTML = animal.diet.toLowerCase() === "unselected" ? "Omnivore" : diet;
-                // title.innerHTML = "Homo Spaien";
+                !!name ? title.innerHTML = "Homo Spaien" : undefined;
             }
             try {
                 const url = animal.imgUrl();

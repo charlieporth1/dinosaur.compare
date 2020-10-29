@@ -62,7 +62,6 @@ function getJSON() {
 }
 let homoSapien = new HumanObject;
 function setHuman(humanObject) {
-    console.log("Human Set");
     homoSapien = humanObject;
 }
 function getAnimal(animalName) { //Get JSON data
