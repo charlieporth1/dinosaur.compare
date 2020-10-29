@@ -1,9 +1,9 @@
 function commafy(num) {
-    return num.toString().toLocaleString()
+    return num.toString().trim().toLocaleString()
 }
 
 function getInputValue(inputId) {
-    return String(window.document.getElementById(inputId.toString()).value)
+    return String(window.document.getElementById(inputId.toString().trim()).value).trim()
 }
 
 function humanifyHeight(h) {

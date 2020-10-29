@@ -12,14 +12,16 @@ function onRetry() {
     document.getElementById("retry-btn").hidden = true;
     document.getElementById("grid").hidden = true;
 }
+(function () {
+   $.getScript("/js/objects.js", function () {
 
-($.getScript("/js/utils.js", function (script) {
-})());
-($.getScript("/js/objects.js", function (script) {
-})());
+   });
+    $.getScript("/js/utils.js", function () {
 
+    });
+}())
 function createData() {
-    const animalData = Array.from(this.getData());
+    const animalData = Array.from(this.getAnimalData());
     console.log(animalData)
     const pigeon = animalData.filter((data) => data.name.toString().toLowerCase() === "pigeon").shift();
     const name = this.getInputValue("name");
@@ -37,19 +39,22 @@ function createData() {
     human = human.populate(json);
     this.setHuman(human);
 
-    function generateMultiplier(min, max) {
-        return Math.floor((Math.random() * (max - min)) + min) * 10;
+    function generateMultiplier(min, max, interval=1) {
+        const r = Math.random();
+        const i = Math.floor(max / interval) - (interval === 1 ? min : 0);
+        return Math.floor(((r * (i)) * interval) + min);
     }
 
     function generateResults() {
-        const animalDataFiltered = (diet.toLowerCase() !== "unselected" ? animalData.filter((animal) => animal.diet === diet) : animalData);
+        const animalDataFiltered = animalData.filter((animal) => animal.diet.trim().toLowerCase() === diet.toLowerCase());
 
         function query(height, weight) {
-            const range = generateMultiplier(48, 100);
-            const weightMx = generateMultiplier(1, 300);
-            const heightFiltered = animalDataFiltered.filter((animal) => height <= animal.height + range * 2 && height >= animal.height - (range / 2) + 9);
-            const weightFiltered = animalDataFiltered.filter((animal) => weight * weightMx <= animal.weight + range * (weightMx / 2) && height * weightMx >= animal.weight - (range / 2) + 1);
-            if (weightFiltered.length <= 0 && heightFiltered.length <= 0) {
+            const range = generateMultiplier(10, 100);
+            const weightMx = generateMultiplier(1, 300, 25);
+            const heightFiltered = animalDataFiltered.filter((animal) => height  <= animal.height && height >= animal.height - (range));//+9 excludes pigeon
+            const weightFiltered = animalDataFiltered.filter((animal) => weight * weightMx <= animal.weight + range * (weightMx / 2) && weight * weightMx >= animal.weight - (range / 2) + 1);
+            if (weightFiltered.length === 0 && heightFiltered.length === 0) {
+                debugger;
                 (!!height && !!weight) && query(height, weight); //Rerun if not found without a infinite loop if  0
                 return;
             }

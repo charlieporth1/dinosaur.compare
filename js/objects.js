@@ -46,23 +46,29 @@ function AnimalObject() {
 function getJSON() {
     return (function () {
         let json = null;
-        $.getJSON("../dino.json", function (data) {
+        $.ajax({
+            'async': false,
+            'global': false,
+            'url': "../dino.json",
+            'dataType': "json",
+            'success': function (data) {
                 json = data;
-            });
+            }
+        });
         return json;
     })();
 }
-let human = HumanObject;
+let homoSapien = new HumanObject;
 function setHuman(humanObject) {
     console.log("Human Set");
-    human = humanObject;
+    homoSapien = humanObject;
 }
 function getAnimal(animalName) { //Get JSON data
-        const data = Array.from(getData()).filter((animal) => animal.name === animalName).shift();
-        return (animalName.toString().toLowerCase() === "human"  && human) ?  human : data;
+        const data = Array.from(getAnimalData()).filter((animal) => animal.name === animalName).shift();
+        return (animalName.toString().toLowerCase() === "human"  && homoSapien) ?  homoSapien : data;
 }
 
-function getData() { //Array of JSON Data
+function getAnimalData() { //Array of JSON Data
     const animalsJSON = this.getJSON().Dinos;
     const animals = Array.from(animalsJSON).map((data) => {
         const animal = new AnimalObject;
