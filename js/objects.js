@@ -6,6 +6,7 @@ function HumanObject() {
     this.height = 200;
     this.diet = 'meat';
     this.isHuman = true;
+
     this.imgUrl = function () {
         return "../images/human.png";
     };
@@ -28,6 +29,7 @@ function AnimalObject() {
     this.weight = 200;
     this.height = 200;
     this.isHuman = false;
+
     this.imgUrl = function () {
         return `../images/${encodeURI(this.name)}.png`;
     };

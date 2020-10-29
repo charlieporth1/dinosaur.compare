@@ -7,6 +7,7 @@
     align-items: center;
     justify-content: center;
     width: auto;
+    padding: 25px;
 }
 
 .dino-info-title {
