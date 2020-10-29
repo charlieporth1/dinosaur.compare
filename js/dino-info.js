@@ -1,13 +1,8 @@
-function replaceAnimal(divId, dinoName, json) {
+function replaceAnimal(divId, dinoName) {
     setTimeout(function () {
-        let animal = this.getAnimal(dinoName);
-        const isHuman = dinoName === "human";
-        if (!animal)  {
-            const human = new HumanObject();
-            animal = human.populate(json)
-        }
-
-        console.log(animal);
+        let animal = this.getAnimal(dinoName.toString());
+        console.log("replaceAnimal animal ", animal)
+        const isHuman = animal.isHuman && dinoName.toString().toLowerCase() === "human";
         //Root div
         const rootElement = document.querySelector(`#${divId}`);
         //Core data
@@ -20,7 +15,7 @@ function replaceAnimal(divId, dinoName, json) {
             const heightP = rootElement.getElementsByClassName("dino-info-height")[0];
             const weightP = rootElement.getElementsByClassName("dino-info-weight")[0];
             heightP.innerHTML = humanifyHeight(animal.height);
-            weightP.innerHTML = this.commafy(animal.weight) + " lbs";
+            weightP.innerHTML = commafy(animal.weight) + " lbs";
             //Where when diet Data
             const whereP = rootElement.getElementsByClassName("dino-info-where")[0];
             const whenP = rootElement.getElementsByClassName("dino-info-when")[0];
@@ -32,7 +27,7 @@ function replaceAnimal(divId, dinoName, json) {
                 whenP.hidden = true;
                 whereP.hidden = true;
                 factP.hidden = true;
-                title.innerHTML = "Homo Spaien";
+                // title.innerHTML = "Homo Spaien";
             }
             try {
                 const url = animal.imgUrl();
@@ -44,10 +39,10 @@ function replaceAnimal(divId, dinoName, json) {
                 console.error("Could not find img " + e.toString())
             }
         } else {
-            for (let item of document.getElementsByClassName("grid-item")) {
-                item.hidden = true;
-            }
+            // for (let item of document.getElementsByClassName("grid-item")) {
+            //     item.hidden = true;
+            // }
         }
-    }, 1000)
+    }, 1500)
 
 }

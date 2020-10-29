@@ -1,9 +1,11 @@
 function HumanObject() {
     this.name = "Charlie Porth";
+    this.species = "Homo Sapien";
     this.fact = "Is a Full Stack Developer";
     this.weight = 200;
     this.height = 200;
     this.diet = 'meat';
+    this.isHuman = true;
     this.imgUrl = function () {
         return "../images/human.png";
     };
@@ -18,12 +20,14 @@ function HumanObject() {
 
 function AnimalObject() {
     this.name = "Charlie Porth";
+    this.species = `${this.name}`;
     this.fact = "Is a software developer";
     this.when = "2020";
     this.diet = "meat";
     this.where = "USA";
     this.weight = 200;
     this.height = 200;
+    this.isHuman = false;
     this.imgUrl = function () {
         return `../images/${encodeURI(this.name)}.png`;
     };
@@ -36,32 +40,26 @@ function AnimalObject() {
         this.when = data.when;
         this.diet = data.diet;
         return this;
-    }
+    };
 }
 
 function getJSON() {
     return (function () {
         let json = null;
-        $.ajax({
-            'async': false,
-            'global': false,
-            'url': "../dino.json",
-            'dataType': "json",
-            'success': function (data) {
+        $.getJSON("../dino.json", function (data) {
                 json = data;
-            }
-        });
+            });
         return json;
     })();
 }
-
+let human = HumanObject;
+function setHuman(humanObject) {
+    console.log("Human Set");
+    human = humanObject;
+}
 function getAnimal(animalName) { //Get JSON data
-    try {
         const data = Array.from(getData()).filter((animal) => animal.name === animalName).shift();
-        return data;
-    } catch (e) {
-        return new HumanObject;
-    }
+        return (animalName.toString().toLowerCase() === "human"  && human) ?  human : data;
 }
 
 function getData() { //Array of JSON Data
