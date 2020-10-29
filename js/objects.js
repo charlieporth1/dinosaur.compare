@@ -51,7 +51,7 @@ function getJSON() {
         $.ajax({
             'async': false,
             'global': false,
-            'url': getUrl()+"/dino.json",
+            'url': "../dino.json",
             'dataType': "json",
             'success': function (data) {
                 json = data;
