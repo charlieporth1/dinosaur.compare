@@ -16,10 +16,10 @@ function onRetry() {
 }
 
 (function () {
-    $.getScript("js/objects.js", function () {
+    $.getScript(`${baseUrl()}/js/objects.js`, function () {
 
     });
-    $.getScript("js/utils.js", function () {
+    $.getScript(`${baseUrl()}/js/utils.js`, function () {
 
     });
 }());
@@ -76,7 +76,7 @@ function createData() {
             const userProg = document.createElement('script');
             Array.from(animalResults).forEach((animal) => {
                 const name = animal.isHuman ? "human" : animal.name.toString();
-                const html = `<div class="grid-item"  id="${encodeId(name)}" w3-include-html="view/dinoInfo.html"></div>`;
+                const html = `<div class="grid-item"  id="${encodeId(name)}" w3-include-html="${baseUrl()}/view/dinoInfo.html"></div>`;
                 window.document.getElementById("grid").innerHTML += html;
                 userProg.text += [`\n\t replaceAnimal("${encodeId(name)}", "${name}");`].join('\n');
             });

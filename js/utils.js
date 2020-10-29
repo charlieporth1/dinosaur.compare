@@ -24,3 +24,9 @@ function decodeId(id) {
 function getUrl() {
     return document.URL;
 }
+function baseUrl() {
+    return isProd() ? "/dinosaur.compare" : '';
+}
+function isProd() {
+    return getUrl().includes(".io") || getUrl().includes(".dev") || getUrl().includes(".com") || !getUrl().includes("localhost");
+}

@@ -8,7 +8,7 @@ function HumanObject() {
     this.isHuman = true;
 
     this.imgUrl = function () {
-        return "../images/human.png";
+        return baseUrl() + "/images/human.png";
     };
     this.populate = function (json) {
         this.name = json.name;
@@ -31,7 +31,7 @@ function AnimalObject() {
     this.isHuman = false;
 
     this.imgUrl = function () {
-        return `../images/${encodeURI(this.name)}.png`;
+        return `${baseUrl()}/images/${encodeURI(this.name)}.png`;
     };
     this.populate = function (data) {
         this.name = data.species;
@@ -51,7 +51,7 @@ function getJSON() {
         $.ajax({
             'async': false,
             'global': false,
-            'url': "../dino.json",
+            'url': baseUrl()+"/dino.json",
             'dataType': "json",
             'success': function (data) {
                 json = data;
