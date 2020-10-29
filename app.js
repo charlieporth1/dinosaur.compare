@@ -16,10 +16,10 @@ function onRetry() {
 }
 
 (function () {
-    $.getScript("/js/objects.js", function () {
+    $.getScript("js/objects.js", function () {
 
     });
-    $.getScript("/js/utils.js", function () {
+    $.getScript("js/utils.js", function () {
 
     });
 }());
