@@ -62,9 +62,10 @@ function createData() {
             }
             heightFiltered.length <= 2 && heightFiltered.push(animals[generateMultiplier(0, animals.length - 1)], animals[generateMultiplier(0, animals.length - 1)], animals[generateMultiplier(0, animals.length - 1)]); //random if null
             weightFiltered.length <= 2 && weightFiltered.push(animals[generateMultiplier(0, animals.length - 1)], animals[generateMultiplier(0, animals.length - 1)], animals[generateMultiplier(0, animals.length - 1)], animals[generateMultiplier(0, animals.length - 1)], animals[generateMultiplier(0, animals.length - 1)]);//random if null
+            const combineFiltered = [...heightFiltered, ...weightFiltered].filter(onlyUnique);
 
-            const top = [heightFiltered.shift(), pigeon, weightFiltered.shift()];
-            const middle = [heightFiltered[1], human, weightFiltered[1]];
+            const top = [combineFiltered.shift(), pigeon, combineFiltered[1]];
+            const middle = [combineFiltered[2], human, combineFiltered[3]];
             const bottom = animals.map((data) => [...top, ...middle].filter((item) => item.name === data.name).length === 0 ? data : undefined).filter((data) => !!data);
             const root = [...top, ...middle, ...bottom];
 
