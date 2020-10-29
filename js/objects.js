@@ -8,7 +8,7 @@ function HumanObject() {
     this.isHuman = true;
 
     this.imgUrl = function () {
-        return baseUrl() + "/images/human.png";
+        return baseUrl() + "/images/human.png".toLowerCase();
     };
     this.populate = function (json) {
         this.name = json.name;
@@ -31,7 +31,7 @@ function AnimalObject() {
     this.isHuman = false;
 
     this.imgUrl = function () {
-        return `${baseUrl()}/images/${encodeURI(this.name)}.png`;
+        return `${baseUrl()}/images/${encodeURI(this.name)}.png`.toLowerCase();
     };
     this.populate = function (data) {
         this.name = data.species;
