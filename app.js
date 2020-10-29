@@ -66,8 +66,8 @@ function createData() {
             const top = [heightFiltered.shift(), pigeon, weightFiltered.shift()];
             const middle = [heightFiltered[1], human, weightFiltered[1]];
             const bottom = animals.map((data) => [...top, ...middle].filter((item) => item.name === data.name).length === 0 ? data : undefined).filter((data) => !!data);
-            const root = [...top, ...middle, ...bottom].filter(onlyUnique);
-            console.log(root);
+            const root = [...top, ...middle, ...bottom];
+
             return root; //result
         }
 
