@@ -67,21 +67,22 @@ function createData() {
             const top = [heightFiltered.shift(), pigeon, weightFiltered.shift()];
             const middle = [heightFiltered[1], human, weightFiltered[1]];
             const bottom = animals.map((data) => [...top, ...middle].filter((item) => item.name === data.name).length === 0 ? data : undefined).filter((data) => !!data);
-            const root = [...top, ...middle, ...bottom];
+            const root = [...top, ...middle, ...bottom].filter(onlyUnique);
             console.log(root);
             return root; //result
         }
 
         function addToDom() {
             const animalResults = query(rootHeight, rootWeight);
-            Array.from(animalResults).forEach((data) => {
-                const html = `<div class="grid-item"  id="${data.name}" w3-include-html="view/dinoInfo.html"></div>`;
+            const userProg = document.createElement('script');
+            Array.from(animalResults).forEach((animal) => {
+                const name = animal.isHuman ? "human" : animal.name.toString();
+                const html = `<div class="grid-item"  id="${encodeId(name)}" w3-include-html="view/dinoInfo.html"></div>`;
                 window.document.getElementById("grid").innerHTML += html;
-                const name = data.isHuman ? "human" : data.name;
-                const userProg = document.createElement('script');
-                userProg.text = [`\nreplaceAnimal("${name}", "${name}");`, "includeHTML();\n"].join('\n');
-                document.head.appendChild(userProg);
+                userProg.text += [`\n\t replaceAnimal("${encodeId(name)}", "${name}");`].join('\n');
             });
+            userProg.text += [`\n\t includeHTML();\n`].join('\n');
+            document.head.appendChild(userProg);
 
         }
 
