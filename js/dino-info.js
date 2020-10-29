@@ -3,6 +3,7 @@ function replaceAnimal(divId, dinoName) {
         let animal = this.getAnimal(dinoName.toString());
         console.log("replaceAnimal animal ", animal)
         const isHuman = animal.isHuman && dinoName.toString().toLowerCase() === "human";
+        console.log("isHuman ", isHuman)
         //Root div
         const rootElement = document.querySelector(`#${divId}`);
         //Core data
