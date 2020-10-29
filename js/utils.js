@@ -21,3 +21,6 @@ function encodeId(id) {
 function decodeId(id) {
     return id.toString().replace("-", "\ ").trim();
 }
+function getUrl() {
+    return document.URL;
+}
