@@ -1,3 +1,5 @@
+
+
 function HumanObject() {
     this.name = "Charlie Porth";
     this.species = "Homo Sapien";
@@ -8,7 +10,7 @@ function HumanObject() {
     this.isHuman = true;
 
     this.imgUrl = function () {
-        return this.baseUrl() + "/images/human.png".toLowerCase();
+        return baseUrl() + "/images/human.png";
     };
     this.populate = function (json) {
         this.name = json.name;
@@ -31,7 +33,7 @@ function AnimalObject() {
     this.isHuman = false;
 
     this.imgUrl = function () {
-        return `${this.baseUrl()}/images/${encodeURI(this.name)}.png`.toLowerCase();
+        return `${baseUrl()}/images/${encodeURI(this.name)}.png`.toLowerCase();
     };
     this.populate = function (data) {
         this.name = data.species;
@@ -51,7 +53,7 @@ function getJSON() {
         $.ajax({
             'async': false,
             'global': false,
-            'url': this.baseUrl()+"/dino.json",
+            'url': baseUrl()+"/dino.json",
             'dataType': "json",
             'success': function (data) {
                 json = data;
