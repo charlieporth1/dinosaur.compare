@@ -40,3 +40,11 @@ function titleCase(str) {
     // Directly return the joined string
     return splitStr.join(' ');
 }
+function isEmpty(s) {
+    const str = s.toString().trim();
+    try {
+        return !(str) || str === "" || str.length === 0;
+    } catch (e) {
+        return true;
+    }
+}
