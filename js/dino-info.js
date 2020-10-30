@@ -8,8 +8,8 @@ function replaceAnimal(divId, dinoName) {
             const isHuman = animal.isHuman && dinoName.toString().toLowerCase() === "human";
             let name, diet = "";
             try {
-                name = animal.name.charAt(0).toUpperCase() + animal.name.slice(1, animal.name.length - 1);
                 diet = animal.diet.charAt(0).toUpperCase() + animal.diet.slice(1, animal.diet.length - 1);
+                name = this.titleCase(animal.name.charAt(0).toUpperCase() + animal.name.slice(1, animal.name.length - 1));
             } catch (err) {
                 console.error(err);
             }
