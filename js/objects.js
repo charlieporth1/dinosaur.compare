@@ -8,7 +8,7 @@ function HumanObject() {
     this.isHuman = true;
 
     this.imgUrl = function () {
-        return baseUrl() + "/images/human.png".toLowerCase();
+        return this.baseUrl() + "/images/human.png".toLowerCase();
     };
     this.populate = function (json) {
         this.name = json.name;
@@ -31,7 +31,7 @@ function AnimalObject() {
     this.isHuman = false;
 
     this.imgUrl = function () {
-        return `${baseUrl()}/images/${encodeURI(this.name)}.png`.toLowerCase();
+        return `${this.baseUrl()}/images/${encodeURI(this.name)}.png`.toLowerCase();
     };
     this.populate = function (data) {
         this.name = data.species;
@@ -51,7 +51,7 @@ function getJSON() {
         $.ajax({
             'async': false,
             'global': false,
-            'url': baseUrl()+"/dino.json",
+            'url': this.baseUrl()+"/dino.json",
             'dataType': "json",
             'success': function (data) {
                 json = data;
@@ -65,7 +65,7 @@ function setHuman(humanObject) {
     homoSapien = humanObject;
 }
 function getAnimal(animalName) { //Get JSON data
-        const data = Array.from(getAnimalData()).filter((animal) => animal.name === animalName).shift();
+        const data = Array.from(this.getAnimalData()).filter((animal) => animal.name === animalName).shift();
         return (animalName.toString().toLowerCase() === "human"  && homoSapien) ?  homoSapien : data;
 }
 
