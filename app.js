@@ -80,6 +80,7 @@ function createData() {
                 const html = `<div class="grid-item"  id="${encodeId(name)}" w3-include-html="${baseUrl()}/view/dinoInfo.html"></div>`;
                 window.document.getElementById("grid").innerHTML += html;
                 userProg.text += [`\n\t replaceAnimal("${encodeId(name)}", "${name}");`].join('\n');
+
             });
             userProg.text += [`\n\t includeHTML();\n`].join('\n');
             document.head.appendChild(userProg);

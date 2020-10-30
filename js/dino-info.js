@@ -10,48 +10,51 @@ function replaceAnimal(divId, dinoName) {
             try {
                 name = animal.name.charAt(0).toUpperCase() + animal.name.slice(1, animal.name.length - 1);
                 diet = animal.diet.charAt(0).toUpperCase() + animal.diet.slice(1, animal.diet.length - 1);
-            } catch (e) {
+            } catch (err) {
+                console.error(err);
             }
 
             //Core data
             const title = rootElement.getElementsByClassName("dino-info-title")[0];
             const factP = rootElement.getElementsByClassName("dino-info-fact")[0];
-            title.innerHTML = animal.name ? name : '';
-            factP.innerHTML = animal.fact ? animal.fact : '';
+            title.innerHTML = animal.name || '';
+            factP.innerHTML = animal.fact || '';
 
             //Height weight data
             const heightP = rootElement.getElementsByClassName("dino-info-height")[0];
             const weightP = rootElement.getElementsByClassName("dino-info-weight")[0];
-            heightP.innerHTML = humanifyHeight(animal.height);
-            weightP.innerHTML = commafy(animal.weight) + " lbs";
+            heightP.innerHTML = this.humanifyHeight(animal.height);
+            weightP.innerHTML = this.commafy(animal.weight) + " lbs";
 
             //Where when diet Data
             const whereP = rootElement.getElementsByClassName("dino-info-where")[0];
             const whenP = rootElement.getElementsByClassName("dino-info-when")[0];
             const dietP = rootElement.getElementsByClassName("dino-info-diet")[0];
 
-            whereP.innerHTML = animal.where ? animal.where : '';
-            whenP.innerHTML = animal.when ? animal.when : '';
-            dietP.innerHTML = animal.diet ? diet : '';
+            whereP.innerHTML = animal.where || '';
+            whenP.innerHTML = animal.when || '';
+            dietP.innerHTML = animal.diet || '';
 
             if (isHuman) {
                 whenP.hidden = true;
                 whereP.hidden = true;
                 factP.hidden = true;
                 dietP.innerHTML = animal.diet.toLowerCase() === "unselected" ? "Omnivore" : diet;
-                !!name ? title.innerHTML = "Homo Spaien" : undefined;
+                if (!name) {
+                    title.innerHTML = "Homo Spaien";
+                }
             }
             try {
                 const url = animal.imgUrl();
                 const img = rootElement.getElementsByClassName("dino-info-img")[0];
                 img.src = url;
-                img.alt = `${animal.name} from ${animal.where}`
-            } catch (e) {
-                console.error("Could not find img " + e.toString())
+                img.alt = `${animal.name} from ${animal.where}`;
+            } catch (error) {
+                console.error("Could not find img " + error.toString());
             }
         } else {
-            console.error(`Not found ${divId}`)
+            console.error(`Not found ${divId}`);
         }
-    }, 1500)
+    }, 1500);
 
 }
