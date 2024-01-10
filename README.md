@@ -1,5 +1,5 @@
 # Object Oriented Javascript 
-
+Udactiy NanoDegree Intro to JavaScript & Web development project
 ## Student Instructions
 
 ### Big Picture
